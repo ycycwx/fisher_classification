@@ -52,6 +52,7 @@ def threshold(direct, avg0, avg1, data0, data1, sw0 = None, sw1 = None):
     return 0.5 * direct.transpose() * ((cnt1 * avg0 + cnt0 * avg1) / (cnt0 + cnt1) + (sw0 * avg0 + sw1 * avg1) / (sw0 + sw1))
     # return direct.transpose() * (avg0 + avg1) / 2
 
+# Train proccess
 def train(file):
     (data0, data1) = open_file(file)
     avg0, avg1 = avg_vector(data0), avg_vector(data1)
@@ -65,6 +66,7 @@ def train(file):
     theta = threshold(direct, avg0, avg1, data0, data1)
     return direct, theta
 
+# Test proccess
 def test(file, direct, theta):
     (data0, data1) = open_file(file)
     num = len(data0) + len(data1)
@@ -88,6 +90,7 @@ def test(file, direct, theta):
             hit += 1
     return hit / num
 
+# Calculate sw
 def sw(direct, wcs):
     return direct.transpose() * wcs * direct
 
